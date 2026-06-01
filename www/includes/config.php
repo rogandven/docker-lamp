@@ -21,7 +21,7 @@ $dbConfig = [
 // Funciones de base de datos
 function connectDB($config) {
     try {
-        $dsn = "mysql:host={$config['host']};dbname={$config['database']};charset=utf8mb4";
+        $dsn = "mssql:host={$config['host']};dbname={$config['database']};charset=utf8mb4";
         $options = [
             PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
             PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
