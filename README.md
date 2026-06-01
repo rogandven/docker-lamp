@@ -5,7 +5,7 @@
 [![GitHub Issues](https://img.shields.io/github/issues/jersonmartinez/docker-lamp)](https://github.com/jersonmartinez/docker-lamp/issues)
 [![GitHub License](https://img.shields.io/github/license/jersonmartinez/docker-lamp)](https://github.com/jersonmartinez/docker-lamp/blob/main/LICENSE)
 
-A modern and efficient LAMP stack (Linux, Apache, MySQL, PHP) development environment using Docker. Perfect for PHP development with a clean, easy-to-use interface and dark mode support.
+A modern and efficient LAMP stack (Linux, Apache, SQL Server, PHP) development environment using Docker. Perfect for PHP development with a clean, easy-to-use interface and dark mode support.
 
 ## 🎨 Interface Themes
 
@@ -29,7 +29,7 @@ Watch the tutorial video to get started:
 - **Modern Interface**: Clean UI with dark/light mode support
 - **Real-time Status**: Monitor your services at a glance
 - **Database Management**: Includes PHPMyAdmin for easy database administration
-- **Development Ready**: Perfect for PHP projects with MySQL
+- **Development Ready**: Perfect for PHP projects with SQL Server
 - **Customizable**: Easy to modify environment variables and configurations
 
 ## 📋 Prerequisites
@@ -66,16 +66,16 @@ Watch the tutorial video to get started:
 Edit the `.env` file to configure:
 
 ```env
-MYSQL_ROOT_PASSWORD=your_root_password
-MYSQL_DATABASE=your_database
-MYSQL_USER=your_user
-MYSQL_PASSWORD=your_password
+MSSQL_ROOT_PASSWORD=your_root_password
+MSSQL_DATABASE=your_database
+MSSQL_USER=your_user
+MSSQL_PASSWORD=your_password
 ```
 
 ### Service Versions
 
 - PHP: 8.2
-- MySQL: Latest
+- SQL Server: Latest
 - Apache: 2.4
 - PHPMyAdmin: Latest
 
@@ -120,7 +120,7 @@ docker-lamp/
 For more detailed information, check out:
 - [Docker Documentation](https://docs.docker.com/)
 - [PHP Documentation](https://www.php.net/docs.php)
-- [MySQL Documentation](https://dev.mysql.com/doc/)
+- [SQL Server Documentation](https://dev.mysql.com/doc/)
 
 ## 🤝 Contributing
 

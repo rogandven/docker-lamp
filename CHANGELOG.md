@@ -33,6 +33,6 @@ All notable changes to this project will be documented in this file.
 ### Added
 - Basic LAMP stack implementation
 - Docker configuration
-- MySQL database integration
+- SQL Server database integration
 - PHPMyAdmin setup
 - Basic web interface

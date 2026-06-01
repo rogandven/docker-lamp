@@ -12,16 +12,16 @@ function getEnvVar($name, $default = null) {
 
 // Configuración de la base de datos
 $dbConfig = [
-    'host'     => getEnvVar('MYSQL_HOST', 'db'),
-    'database' => getEnvVar('MYSQL_DATABASE'),
-    'username' => getEnvVar('MYSQL_USER'),
-    'password' => getEnvVar('MYSQL_PASSWORD')
+    'host'     => getEnvVar('MSSQL_HOST', 'db'),
+    'database' => getEnvVar('MSSQL_DATABASE'),
+    'username' => getEnvVar('MSSQL_USER'),
+    'password' => getEnvVar('MSSQL_PASSWORD')
 ];
 
 // Funciones de base de datos
 function connectDB($config) {
     try {
-        $dsn = "mysql:host={$config['host']};dbname={$config['database']};charset=utf8mb4";
+        $dsn = "pdo_sqlserv:Server={$config['host']};Database={$config['database']}";
         $options = [
             PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
             PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
@@ -29,6 +29,7 @@ function connectDB($config) {
         ];
         return new PDO($dsn, $config['username'], $config['password'], $options);
     } catch (PDOException $e) {
+        print_r($e);
         error_log("Error de conexión: " . $e->getMessage());
         return null;
     }
