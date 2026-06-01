@@ -1,4 +1,5 @@
 FROM php:8.2-apache
+# https://github.com/Namoshek/docker-php-mssql/blob/master/8.2/cli/Dockerfile
 
 ENV ACCEPT_EULA=Y
 
@@ -54,8 +55,11 @@ RUN chown -R webuser:www-data /var/www/html \
 # Install prerequisites for the sqlsrv and pdo_sqlsrv PHP extensions.
 # Some packages are pinned with lower priority to prevent build issues due to package conflicts.
 # Link: https://github.com/microsoft/linux-package-repositories/issues/39
-RUN curl https://packages.microsoft.com/keys/microsoft.asc | apt-key add - \
-    && curl https://packages.microsoft.com/config/debian/11/prod.list > /etc/apt/sources.list.d/mssql-release.list \
+# RUN curl https://packages.microsoft.com/keys/microsoft.asc | apt-key add - \
+    # && curl https://packages.microsoft.com/config/debian/11/prod.list > /etc/apt/sources.list.d/mssql-release.list \
+RUN (curl https://packages.microsoft.com/keys/microsoft.asc | tac | tac) > /usr/share/keyrings/microsoft-prod.gpg
+RUN (curl https://packages.microsoft.com/config/debian/12/prod.list | tac | tac) > /etc/apt/sources.list.d/mssql-release.list
+RUN echo "xd" \
     && echo "Package: unixodbc\nPin: origin \"packages.microsoft.com\"\nPin-Priority: 100\n" >> /etc/apt/preferences.d/microsoft \
     && echo "Package: unixodbc-dev\nPin: origin \"packages.microsoft.com\"\nPin-Priority: 100\n" >> /etc/apt/preferences.d/microsoft \
     && echo "Package: libodbc1:amd64\nPin: origin \"packages.microsoft.com\"\nPin-Priority: 100\n" >> /etc/apt/preferences.d/microsoft \
@@ -66,6 +70,8 @@ RUN curl https://packages.microsoft.com/keys/microsoft.asc | apt-key add - \
     && rm -rf /var/lib/apt/lists/*
 
 # Install required PHP extensions and all their prerequisites available via apt.
+COPY --from=mlocati/php-extension-installer /usr/bin/install-php-extensions /usr/bin/install-php-extensions
+
 RUN chmod uga+x /usr/bin/install-php-extensions \
     && sync \
     && install-php-extensions bcmath ds exif gd intl opcache pcntl pcov pdo_sqlsrv redis sqlsrv zip
