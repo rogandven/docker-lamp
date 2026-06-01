@@ -53,7 +53,7 @@ require_once 'includes/config.php';
             <div class="col-md-8">
                 <div class="text-center mb-5 fade-in">
                     <h1 class="display-4 mb-3">Welcome to your LAMP Stack</h1>
-                    <p class="lead text-muted">Apache + MySQL + PHP on Docker</p>
+                    <p class="lead text-muted">Apache + SQL Server + PHP on Docker</p>
                 </div>
 
                 <div class="row g-4">
@@ -68,12 +68,12 @@ require_once 'includes/config.php';
                         </div>
                     </div>
 
-                    <!-- MySQL Status -->
+                    <!-- SQL Server Status -->
                     <div class="col-md-4">
-                        <div class="card h-100 shadow-sm status-card" data-tooltip="MySQL Connection Status">
+                        <div class="card h-100 shadow-sm status-card" data-tooltip="SQL Server Connection Status">
                             <div class="card-body text-center">
                                 <i class="fas fa-database icon-large <?php echo $db ? 'connected' : 'error'; ?>"></i>
-                                <h5 class="card-title">MySQL</h5>
+                                <h5 class="card-title">SQL Server</h5>
                                 <p class="card-text"><?php echo $db ? 'Connected' : 'Disconnected'; ?></p>
                             </div>
                         </div>

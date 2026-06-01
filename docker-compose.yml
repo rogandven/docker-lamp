@@ -2,24 +2,26 @@ version: "3.8"
 
 services:
     db:
-        image: mysql:8.0
+        image: mcr.microsoft.com/mssql/server:2019-latest
         restart: unless-stopped
         ports: 
-            - "127.0.0.1:${MYSQL_PORT}:3306"
-        command: --default-authentication-plugin=mysql_native_password
+            - "127.0.0.1:${MSSQL_PORT}:1433"
         environment:
-            MYSQL_DATABASE: ${MYSQL_DATABASE}
-            MYSQL_USER: ${MYSQL_USER}
-            MYSQL_PASSWORD: ${MYSQL_PASSWORD}
-            MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+            ACCEPT_EULA: Y
+            MSSQL_DATABASE: master
+            MSSQL_USER: sa
+            MSSQL_SA_PASSWORD: ${MSSQL_PASSWORD}
+            MSSQL_PID: "Express"
         volumes:
             - ./dump:/docker-entrypoint-initdb.d:ro
             - ./conf:/etc/mysql/conf.d:ro
             - persistent:/var/lib/mysql
+            - /var/lib/docker/mssql/data:/var/opt/mssql/data
+            - /var/lib/docker/mssql/log:/var/opt/mssql/log
         networks:
             - backend
         healthcheck:
-            test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "-p${MYSQL_ROOT_PASSWORD}"]
+            test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "-p${MSSQL_ROOT_PASSWORD}"]
             interval: 10s
             timeout: 5s
             retries: 5
@@ -34,10 +36,10 @@ services:
                 PHP_POST_MAX_SIZE: ${PHP_POST_MAX_SIZE}
         restart: unless-stopped
         environment:
-            MYSQL_HOST: ${MYSQL_HOST}
-            MYSQL_DATABASE: ${MYSQL_DATABASE}
-            MYSQL_USER: ${MYSQL_USER}
-            MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+            MSSQL_HOST: ${MSSQL_HOST}
+            MSSQL_DATABASE: master
+            MSSQL_USER: sa
+            MSSQL_PASSWORD: ${MSSQL_PASSWORD}
         ports: 
             - "127.0.0.1:${APACHE_PORT}:80"
         volumes:
