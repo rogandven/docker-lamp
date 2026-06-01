@@ -69,11 +69,12 @@ RUN echo "xd" \
     && rm -rf /var/lib/apt/lists/*
 
 # Install required PHP extensions and all their prerequisites available via apt.
-COPY --from=mlocati/php-extension-installer /usr/bin/install-php-extensions /usr/bin/install-php-extensions
+RUN ( curl -sSLf https://github.com/mlocati/docker-php-extension-installer/releases/latest/download/install-php-extensions | tac | tac ) > /usr/bin/install-php-extensions
 
 RUN chmod uga+x /usr/bin/install-php-extensions \
-    && sync \
-    && install-php-extensions bcmath ds exif gd intl opcache pcntl pcov pdo_sqlsrv redis sqlsrv zip
+    && sync
+
+RUN install-php-extensions bcmath ds exif gd intl opcache pcntl pcov pdo_sqlsrv redis sqlsrv zip
 
 # Downloading composer and marking it as executable.
 RUN curl -o /usr/local/bin/composer https://getcomposer.org/composer-stable.phar \

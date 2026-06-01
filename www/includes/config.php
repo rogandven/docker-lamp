@@ -21,7 +21,7 @@ $dbConfig = [
 // Funciones de base de datos
 function connectDB($config) {
     try {
-        $dsn = "sqlserv:Server={$config['host']};Database={$config['database']}";
+        $dsn = "pdo_sqlserv:Server={$config['host']};Database={$config['database']}";
         $options = [
             PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
             PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,

@@ -1,4 +1,6 @@
 <?php
+// phpinfo();
+// die();
 require_once 'includes/config.php';
 ?>
 <!DOCTYPE html>

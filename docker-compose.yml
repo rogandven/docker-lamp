@@ -36,7 +36,7 @@ services:
                 PHP_POST_MAX_SIZE: ${PHP_POST_MAX_SIZE}
         restart: unless-stopped
         environment:
-            MSSQL_HOST: ${MSSQL_HOST}
+            MSSQL_HOST: "127.0.0.1:${MSSQL_PORT}"
             MSSQL_DATABASE: master
             MSSQL_USER: sa
             MSSQL_PASSWORD: ${MSSQL_PASSWORD}
