@@ -22,9 +22,8 @@ RUN apt-get update \
         sendmail \
     && rm -rf /var/lib/apt/lists/* \
     && docker-php-ext-install -j$(nproc) \
-        mysqli \
+        \
         pdo \
-        pdo_mysql \
         zip \
         mbstring \
         gd
