@@ -3,6 +3,7 @@ version: "3.8"
 services:
     db:
         image: mcr.microsoft.com/mssql/server:2019-latest
+        user: root
         restart: unless-stopped
         ports: 
             - "127.0.0.1:${MSSQL_PORT}:1433"
